@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Deposits from "./components/Deposit";
+import NavBar from "./components/NavBar";
+import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <BrowserRouter>
+      <NavBar/>
+      <App />
+      </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

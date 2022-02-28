@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import MainPage from "./web/MainPage";
+import Portfolio from "./web/Portfolio"
+import News from "./web/News"
+import Cryptox from "./web/Cryptox"
+import CoinService from "./services/CoinService";
+import {Box} from "@material-ui/core";
+import {
+    BrowserRouter as Router,
+    Route, Routes
+} from 'react-router-dom';
+import Deposits from "./components/Deposit";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+
+          <Routes>
+              <Route path ="/main" exact element={<MainPage/>}></Route>
+              <Route path ="/portfolio" exact element={<Portfolio/>}></Route>
+              <Route path ="/news" exact element={<News/>}></Route>
+              <Route path ="/" exact element={<Cryptox/>}></Route>
+
+          </Routes>
+
   );
 }
 
 export default App;
+
