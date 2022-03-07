@@ -7,13 +7,8 @@ const useStyle = makeStyles(theme => ({
         color: "#fff"
     }
 }));
-
-
 export default function News(){
-
     const style = useStyle();
-
-
     return(
         <Typography classes={{root:style.text}}>
             CRYPTO NEWS
