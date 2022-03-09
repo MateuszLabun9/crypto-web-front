@@ -6,14 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import Deposits from "./components/Deposit";
 import NavBar from "./components/NavBar";
 import {BrowserRouter} from "react-router-dom";
+import { Provider} from "react-redux";
+import store from "./auth/store";
 
 ReactDOM.render(
-  <React.StrictMode>
-      <BrowserRouter>
-      <NavBar/>
-      <App />
-      </BrowserRouter>
-  </React.StrictMode>,
+    <Provider store={store}>
+      <React.StrictMode>
+          <BrowserRouter>
+          <NavBar/>
+          <App />
+          </BrowserRouter>
+      </React.StrictMode>
+    </Provider>,
   document.getElementById('root')
 );
 

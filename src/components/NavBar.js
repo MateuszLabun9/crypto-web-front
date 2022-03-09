@@ -4,6 +4,7 @@ import {Link} from "@material-ui/core";
 import GridViewRoundedIcon from '@mui/icons-material/GridViewRounded';
 import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
 import NewspaperRoundedIcon from '@mui/icons-material/NewspaperRounded';
+import LoginIcon from '@mui/icons-material/Login';
 import {white} from '@mui/material/colors';
 import {
     Typography,
@@ -87,6 +88,10 @@ const NavBar = () => {
                             <Button component={LinkRouter} to="/news">
                                 <NewspaperRoundedIcon style={{fill: 'white', fontSize: 40}}/>
                             </Button>
+                            <Button component={LinkRouter} to="/login">
+                                <LoginIcon style={{fill: 'white', fontSize: 40}}/>
+                            </Button>
+
                         </Box>
                     </Box>
 
