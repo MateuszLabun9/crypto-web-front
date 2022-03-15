@@ -13,6 +13,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import {connect} from "react-redux";
+import {useState} from "react";
+
 
 function Copyright(props) {
     return (
@@ -30,9 +33,22 @@ function Copyright(props) {
 const theme = createTheme();
 
 
-export default function Login(){
+
+const Login=({ isLoggedIn, ...props})=>{
+
+    const initialState = {
+        email: "",
+        password: "",
+    };
+
+    const [user, setUser] = useState(initialState);
+
     const handleSubmit = (event) => {
         event.preventDefault();
+
+
+
+
         const data = new FormData(event.currentTarget);
         // eslint-disable-next-line no-console
         console.log({
@@ -40,6 +56,17 @@ export default function Login(){
             password: data.get('password'),
         });
     };
+
+    // Metoda wywoływana w przypadku zmiany wartości pól
+    const handleChange = (e) => {
+        e.persist();
+        // Zapisanie wartości do zmiennej
+        setUser(values => ({
+            ...values,
+            [e.target.name]: e.target.value
+        }));
+    };
+
     return(
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
@@ -76,6 +103,8 @@ export default function Login(){
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
+                                value = {user.email}
+                                onChange={handleChange}
                                 margin="normal"
                                 required
                                 fullWidth
@@ -86,6 +115,8 @@ export default function Login(){
                                 autoFocus
                             />
                             <TextField
+                                value={user.password}
+                                onChange={handleChange}
                                 margin="normal"
                                 required
                                 fullWidth
@@ -129,4 +160,10 @@ export default function Login(){
 
     );
 
+
 }
+
+
+
+
+export default connect()(Login);
