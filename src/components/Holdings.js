@@ -23,9 +23,13 @@ class Holdings extends React.Component{
         HoldingsService.getHoldings().then((response)=>{
             this.setState({holdings: response.data})
         })
-        HoldingsService.getHolding().then((response ) =>{
-            this.setState({oneHolding: response.data})
-        })
+        // HoldingsService.getHolding().then((response ) =>{
+        //     this.setState({oneHolding: response.data})
+        // })
+
+        console.log(this.state.holdings.map((holdin, id) =>{
+            console.log(holdin.id)
+        }));
     }
 
     render() {
@@ -44,6 +48,7 @@ class Holdings extends React.Component{
                     </TableHead>
                     <TableBody >
                         {this.state.holdings.map((holding, id)=>(
+
                             <TableRow key={holding.id}  >
                                 <TableCell >{holding.id}</TableCell>
                                 <TableCell>{holding.name}</TableCell>

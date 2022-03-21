@@ -9,13 +9,13 @@ const useStyle = makeStyles(theme => ({
 }));
 
 
-export default function Portfolio(){
+export default function Portfolio() {
 
     const style = useStyle();
 
 
-    return(
-        <Typography classes={{root:style.text}}>
+    return (
+        <Typography classes={{root: style.text}}>
             portfolio
         </Typography>
 

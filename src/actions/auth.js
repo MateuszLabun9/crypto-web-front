@@ -2,7 +2,7 @@ import AuthService from "../services/AuthService";
 import {LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_SUCCESS, SET_MESSAGE} from "./types";
 
 
-export const register = (username, email, password) => {
+export const register = (username, email, password) => (dispatch) => {
     return AuthService.register(username, email, password).then(
         (response) => {
             dispatch({
@@ -35,7 +35,7 @@ export const register = (username, email, password) => {
     );
 };
 
-export const login = (username, password) => {
+export const login = (username, password) => (dispatch) =>{
     return AuthService.login(username, password).then(
         (data) => {
             dispatch({
@@ -64,6 +64,7 @@ export const login = (username, password) => {
 };
 export const logout = () => (dispatch) => {
     AuthService.logout();
+    console.log("jestem tu")
     dispatch({
         type: LOGOUT,
     });

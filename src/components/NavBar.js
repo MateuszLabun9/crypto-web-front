@@ -1,11 +1,12 @@
 import * as React from 'react';
-import {Link as LinkRouter} from 'react-router-dom';
+import {Link as LinkRouter, useNavigate} from 'react-router-dom';
 import {Link} from "@material-ui/core";
 import GridViewRoundedIcon from '@mui/icons-material/GridViewRounded';
 import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
 import NewspaperRoundedIcon from '@mui/icons-material/NewspaperRounded';
 import LoginIcon from '@mui/icons-material/Login';
 import {white} from '@mui/material/colors';
+import { history } from '../helpers/history';
 import {
     Typography,
     Box,
@@ -15,6 +16,9 @@ import {
     Button, makeStyles, Grid
 } from "@material-ui/core";
 import '../style/NavBar.css'
+import {logout} from "../actions/auth";
+import {useEffect} from "react";
+import store from "../auth/store";
 
 
 const pages = ['Home Page', 'Portfolio', 'News'];
@@ -36,8 +40,16 @@ const useStyle = makeStyles(theme => ({
 
     }
 }));
+const initial = {
+    id: 1,
+    username: '',
+    email:"",
+    roles: [],
+    tokenType: "",
+    accessToken: ""
 
-const NavBar = () => {
+}
+const NavBar = (props) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const style = useStyle();
     const handleOpenNavMenu = (event) => {
@@ -45,10 +57,24 @@ const NavBar = () => {
     };
 
 
+    const obj =  localStorage.getItem("user") !== null ? (() =>{
+            const el = JSON.parse(localStorage.getItem("user"))
+            return el.accessToken
+        }) : null
+
+
+
+    //const history = useNavigate();
+
+    const handleLogout = () => {
+        store.dispatch(logout())
+        history.push('/login');
+        window.location.reload();
+    }
+
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
-
 
     return (
         <AppBar classes={{root: style.bar}} position="static">
@@ -81,24 +107,32 @@ const NavBar = () => {
                                 <GridViewRoundedIcon style={{fill: 'white', fontSize: 40}}/>
                             </Button>
 
-
-                            <Button component={LinkRouter} to="/portfolio">
-                                <AccountBalanceWalletRoundedIcon style={{fill: 'white', fontSize: 40}}/>
-                            </Button>
+                            {obj == null ? (<React.Fragment/>) : (
+                                <Button component={LinkRouter} to="/portfolio">
+                                    <AccountBalanceWalletRoundedIcon style={{fill: 'white', fontSize: 40}}/>
+                                </Button>)
+                            }
                             <Button component={LinkRouter} to="/news">
                                 <NewspaperRoundedIcon style={{fill: 'white', fontSize: 40}}/>
                             </Button>
-                            <Button component={LinkRouter} to="/login">
-                                <LoginIcon style={{fill: 'white', fontSize: 40}}/>
-                            </Button>
+                            {/* Sprawdzenie czy token istnieje. Jeśli tak to wyświetlany jest przycisk wylogowania się, jeśli nie to logowania */}
 
+                            {obj == null ?
+                                (<Button component={LinkRouter} to="/login">
+                                        <LoginIcon style={{fill: 'white', fontSize: 40}}/>
+                                    </Button>
+                                ) : (
+                                    <Button onClick={(e) => handleLogout()}>
+
+                                        <LoginIcon style={{fill: 'white', fontSize: 40}}/>
+                                    </Button>)
+                            }
                         </Box>
                     </Box>
-
-
                 </Toolbar>
             </Container>
-
+            <div>
+            </div>
         </AppBar>
     );
 };
