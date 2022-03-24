@@ -10,7 +10,8 @@ Frontend of the project is created in Javascript with usage of libraries React a
 
 First page, which is visible for all users is a main page.
 
-![main](https://user-images.githubusercontent.com/44081987/159897902-d990ff69-20c4-40ce-af1b-2a2e6e61e630.png)
+![image](https://user-images.githubusercontent.com/44081987/159927823-54d67d11-c23c-4419-835b-a9537097c401.png)
+
 
 
 ### Sign in page
