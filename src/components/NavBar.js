@@ -107,7 +107,15 @@ const NavBar = (props) => {
                                 <GridViewRoundedIcon style={{fill: 'white', fontSize: 40}}/>
                             </Button>
 
-                            {obj == null ? (<React.Fragment/>) : (
+                            {obj == null ? ( 
+                                
+                                <Button component={LinkRouter} to="/portfolio">
+                                    <AccountBalanceWalletRoundedIcon style={{fill: 'white', fontSize: 40}}/>
+                                </Button>
+                                
+                                
+                                ) 
+                                : (
                                 <Button component={LinkRouter} to="/portfolio">
                                     <AccountBalanceWalletRoundedIcon style={{fill: 'white', fontSize: 40}}/>
                                 </Button>)

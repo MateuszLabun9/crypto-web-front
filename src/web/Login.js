@@ -19,6 +19,7 @@ import {login} from "../actions/auth";
 import {connect} from "react-redux";
 import {Navigate} from 'react-router-dom';
 import {history} from '../helpers/history';
+import {makeStyles, withStyles}  from '@material-ui/core/styles';
 
 const required = (value) => {
     if (!value) {
@@ -39,14 +40,48 @@ function Copyright(props) {
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
+            <div></div>
+            <Link color="text.secondary" href='https://www.freepik.com/vectors/abstract' >Abstract vector created by starline -
+                    www.freepik.com</Link>
         </Typography>
     );
 }
 
 const theme = createTheme();
 
+const StyledTextField = withStyles({
+    root: {
+      '& label.Mui-focused': {
+        color: '#17283D',
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: '#17283D',
+      },
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          borderColor: '#17283D',
+        },
+        '&:hover fieldset': {
+          borderColor: '#17283D',
+        },
+        '&.Mui-focused fieldset': {
+          borderColor: '#17283D',
+        },
+      },
+    },
+  })(TextField);
+
+  // POPRAWIC TRZEBA
+  const NewButton = withStyles({
+    '&:hover, &:active , &:focus': {
+        boxShadow: 'none',
+        color: 'white',
+        backgroundColor: "#17283D !important", 
+      },
+    })(Button);
 
 class Login extends Component {
+
     constructor(props) {
         super(props);
         this.handleLogin = this.handleLogin.bind(this);
@@ -56,6 +91,7 @@ class Login extends Component {
             username: "",
             password: "",
             loading: false,
+
         };
     }
 
@@ -100,7 +136,6 @@ class Login extends Component {
     componentDidMount() {
         const {isLoggedIn, message} = this.props;
         if (isLoggedIn) {
-            console.log("siema3223")
             return <Navigate to="/main"/>;
         }
     }
@@ -116,7 +151,7 @@ class Login extends Component {
                         sm={4}
                         md={7}
                         sx={{
-                            backgroundImage: 'url(http://localhost:3000/img/background.jpg)',
+                            backgroundImage: 'url(http://localhost:3000/img/ee.jpg)',
                             backgroundRepeat: 'no-repeat',
                             backgroundColor: (t) =>
                                 t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -134,7 +169,7 @@ class Login extends Component {
                                 alignItems: 'center',
                             }}
                         >
-                            <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+                            <Avatar sx={{m: 1, bgcolor: '#17283D'}}>
                                 <LockOutlinedIcon/>
                             </Avatar>
                             <Typography component="h1" variant="h5">
@@ -144,7 +179,7 @@ class Login extends Component {
                                 this.form = c;
                             }}>
                                 <Box sx={{mt: 1}}>
-                                    <TextField
+                                    <StyledTextField
                                         value={this.state.username}
                                         onChange={this.onChangeUsername}
                                         validations={[required]}
@@ -157,7 +192,7 @@ class Login extends Component {
                                         autoComplete="email"
                                         autoFocus
                                     />
-                                    <TextField
+                                    <StyledTextField
                                         value={this.state.password}
                                         onChange={this.onChangePassword}
                                         validations={[required]}
@@ -171,31 +206,38 @@ class Login extends Component {
                                         autoComplete="current-password"
                                     />
                                     <FormControlLabel
-                                        control={<Checkbox value="remember" color="primary"/>}
+                                        control={<Checkbox value="remember" style ={{
+                                            color: '#17283D',
+                                          }} />}
                                         label="Remember me"
                                     />
-                                    <Button
+                                    <NewButton
                                         type="submit"
                                         fullWidth
                                         variant="contained"
-                                        sx={{mt: 3, mb: 2}}
+                                        sx={{mt: 3, mb: 2, bgcolor: '#17283D'}}
                                     >
                                         Sign In
-                                    </Button>
+                                    </NewButton>
+
                                     <Grid container>
                                         <Grid item xs>
-                                            <Link href="#" variant="body2">
+                                            <Link href="#" variant="body2" style ={{
+                                            color: '#17283D',
+                                          }}>
                                                 Forgot password?
                                             </Link>
                                         </Grid>
                                         <Grid item>
-                                            <Link href="#" variant="body2">
+                                            <Link href="#" variant="body2" style ={{
+                                            color: '#17283D',
+                                          }}>
                                                 {"Don't have an account? Sign Up"}
                                             </Link>
                                         </Grid>
                                     </Grid>
+                                    
                                     <Copyright sx={{mt: 5}}/>
-
                                     <CheckButton
                                         style={{display: "none"}}
                                         ref={c => {
@@ -208,8 +250,7 @@ class Login extends Component {
                         </Box>
                     </Grid>
                 </Grid>
-                <a href='https://www.freepik.com/vectors/abstract'>Abstract vector created by starline -
-                    www.freepik.com</a>
+               
             </ThemeProvider>
 
         );
