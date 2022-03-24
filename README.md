@@ -27,7 +27,7 @@ Also the vallidation of the sign in form has created.
 After sign in user can check his wallet and his holdings. All the changes on the market will be tracked so user can see changes of his holdings and what affect has been made on his money.
 
 
-![wallet](https://user-images.githubusercontent.com/44081987/159897933-15e3733c-f1fb-4264-ac46-39aeb2d3b12b.png)
+![image](https://user-images.githubusercontent.com/44081987/159927996-7a4257c5-4b5c-4ddd-8adf-e63b286c7927.png)
 
 
 
